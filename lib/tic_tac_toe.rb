@@ -1,6 +1,15 @@
 class TicTacToe
   attr_reader :board
 
+  WINNING_COMBINATIONS = [
+    ["V", "V", "V", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "V", "V", "V", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "V", "V", "V"],
+    ["V", "-", "-", "V", "-", "-", "V", "-", "-"],
+    ["-", "V", "-", "-", "V", "-", "-", "V", "-"],
+    ["-", "-", "V", "-", "-", "V", "-", "-", "V"]
+  ]
+
   def initialize
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
@@ -15,5 +24,13 @@ class TicTacToe
 
   def player_turn?(player)
     true unless player == "X" && @board.count("X") > @board.count("Y")
+  end
+
+  def winner?
+    challenger_array = @board.map { |elem| elem == "X" ? "V" : "-" }
+    return "Player X win" if WINNING_COMBINATIONS.include?(challenger_array)
+    challenger_array = @board.map { |elem| elem == "Y" ? "V" : "-" }
+    return "Player Y win" if WINNING_COMBINATIONS.include?(challenger_array)
+    "No winner yet"
   end
 end
