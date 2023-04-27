@@ -11,8 +11,16 @@ RSpec.describe TicTacToe do
     expect(tic_tac_toe.play(1, "X")).to eq(["X", 2, 3, 4, 5, 6, 7, 8, 9])
   end
 
-  it "should have a Y in position 1 when player Y plays position 9" do
+  it "should have a Y in position 1 when player Y plays position 1" do
     expect(tic_tac_toe.play(1, "Y")).to eq(["Y", 2, 3, 4, 5, 6, 7, 8, 9])
+  end
+
+  it "should raise an error if position is over 9" do
+    expect { tic_tac_toe.play(10, "Y") }.to raise_error("Position not valid")
+  end
+
+  it "should raise an error if position is below 0" do
+    expect { tic_tac_toe.play(0, "Y") }.to raise_error("Position not valid")
   end
 
   context "when a position is already taken" do
