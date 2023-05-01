@@ -43,14 +43,6 @@ RSpec.describe TicTacToe do
     end
   end
 
-  it "returns an available position" do
-    tic_tac_toe.play(1, "X")
-    tic_tac_toe.play(4, "Y")
-    tic_tac_toe.play(2, "X")
-    tic_tac_toe.play(5, "Y")
-    expect([3, 6, 7, 8, 9].include?(tic_tac_toe.available_position)).to be(true)
-  end
-
   it "wins when a player has a row" do
     tic_tac_toe.play(1, "X")
     tic_tac_toe.play(4, "Y")

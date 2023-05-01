@@ -3,7 +3,8 @@ require_relative "tic_tac_toe"
 class Interface
   attr_reader :game
 
-  def initialize(tic_tac_toe)
+  def initialize(tic_tac_toe, bot)
+    @bot = bot
     @game = tic_tac_toe
     @winner = "No winner yet"
   end
@@ -19,7 +20,7 @@ class Interface
       display_board
       puts @winner = @game.winner?
       exit if @winner != "No winner yet" || (@game.board.grep Integer).none?
-      computer_position = @game.available_position
+      computer_position = @bot.computer_position(@game.board)
       @game.play(computer_position, "Y")
       display_board
       puts @winner = @game.winner?

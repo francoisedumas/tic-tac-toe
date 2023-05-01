@@ -22,11 +22,6 @@ class TicTacToe
     @board
   end
 
-  def available_position
-    available_position = @board.grep Integer
-    available_position.sample
-  end
-
   def player_turn?(player)
     true unless player == "X" && @board.count("X") > @board.count("Y")
   end
