@@ -3,8 +3,8 @@ require_relative "tic_tac_toe"
 class Interface
   attr_reader :game
 
-  def initialize
-    @game = TicTacToe.new
+  def initialize(tic_tac_toe)
+    @game = tic_tac_toe
     @winner = "No winner yet"
   end
 

@@ -1,4 +1,5 @@
 require_relative "lib/interface"
 
-game = Interface.new
+tic_tac_toe = TicTacToe.new
+game = Interface.new(tic_tac_toe)
 game.play
