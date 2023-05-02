@@ -14,14 +14,25 @@ class Interface
     puts "You are the player X"
     display_board
     puts "Player X, please choose a position"
+    # need to improve this loop and to manage errors handling
     while @winner == "No winner yet"
-      position = gets.chomp.to_i
-      @game.play(position, "X")
+      begin
+        position = gets.chomp.to_i
+        @game.play(position, "X")
+      rescue => e
+        puts e.message
+        next
+      end
       display_board
       puts @winner = @game.winner?
       exit if @winner != "No winner yet" || (@game.board.grep Integer).none?
-      computer_position = @bot.computer_position(@game.board)
-      @game.play(computer_position, "Y")
+      begin
+        computer_position = @bot.computer_position(@game.board)
+        @game.play(computer_position, "Y")
+      rescue => e
+        puts e.message
+        next
+      end
       display_board
       puts @winner = @game.winner?
       exit if (@game.board.grep Integer).none?
