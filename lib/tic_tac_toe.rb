@@ -1,5 +1,5 @@
 class TicTacToe
-  attr_reader :board
+  attr_reader :board, :last_player
 
   WINNING_COMBINATIONS = [
     ["V", "V", "V", "-", "-", "-", "-", "-", "-"],
@@ -28,7 +28,12 @@ class TicTacToe
     return true if @last_player.nil?
 
     @last_player != player
-    # true unless player == "X" && @board.count("X") > @board.count("Y")
+  end
+
+  def player_turn
+    return nil if @last_player.nil?
+
+    @last_player == "X" ? "Y" : "X"
   end
 
   def winner?

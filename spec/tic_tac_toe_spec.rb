@@ -23,6 +23,10 @@ RSpec.describe TicTacToe do
     expect { tic_tac_toe.play(0, "Y") }.to raise_error("Position not valid")
   end
 
+  it "returns nil if no player has played yet" do
+    expect(tic_tac_toe.last_player).to eq(nil)
+  end
+
   context "when a position is already taken" do
     before { tic_tac_toe.play(1, "X") }
 
@@ -40,6 +44,10 @@ RSpec.describe TicTacToe do
 
     it "returns the correct board if the players play in alternance" do
       expect(tic_tac_toe.play(2, "X")).to eq(["Y", "X", 3, 4, 5, 6, 7, 8, 9])
+    end
+
+    it "returns the player to play" do
+      expect(tic_tac_toe.player_turn).to eq("X")
     end
   end
 
