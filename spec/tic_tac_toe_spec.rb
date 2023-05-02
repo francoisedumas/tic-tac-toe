@@ -32,14 +32,14 @@ RSpec.describe TicTacToe do
   end
 
   context "when a player plays" do
-    before { tic_tac_toe.play(1, "X") }
+    before { tic_tac_toe.play(1, "Y") }
 
-    it "returns an error if the player is playing 2 times in a row" do
-      expect { tic_tac_toe.play(2, "X") }.to raise_error("It's not your turn")
+    it "returns an error if the player Y is playing 2 times in a row" do
+      expect { tic_tac_toe.play(2, "Y") }.to raise_error("Y it's not your turn")
     end
 
     it "returns the correct board if the players play in alternance" do
-      expect(tic_tac_toe.play(2, "Y")).to eq(["X", "Y", 3, 4, 5, 6, 7, 8, 9])
+      expect(tic_tac_toe.play(2, "X")).to eq(["Y", "X", 3, 4, 5, 6, 7, 8, 9])
     end
   end
 
