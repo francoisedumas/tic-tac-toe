@@ -14,7 +14,6 @@ class Interface
     puts "You are the player X"
     display_board
     puts "Player X, please choose a position"
-    puts ">"
     @game.play(position, "X")
     while @winner == "No winner yet"
       begin
@@ -32,13 +31,21 @@ class Interface
   private
 
   def position
-    return gets.chomp.to_i if @game.player_turn.nil?
-
-    if @game.player_turn == "X"
-      puts ">"
-      gets.chomp.to_i
+    if @game.player_turn == "X" || @game.player_turn.nil?
+      user_position
     else
       @bot.computer_position(@game.board)
+    end
+  end
+
+  def user_position
+    puts ">"
+    begin
+      input = gets.chomp
+      Integer(input)
+    rescue ArgumentError
+      puts "Invalid input: #{input} is not a number"
+      retry
     end
   end
 
