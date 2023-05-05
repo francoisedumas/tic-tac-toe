@@ -1,13 +1,25 @@
 class TicTacToe
-  WINNING_COMBINATIONS = [
-    %w[V V V - - - - - -],
-    %w[- - - V V V - - -],
-    %w[- - - - - - V V V],
-    %w[V - - V - - V - -],
-    %w[- V - - V - - V -],
-    %w[- - V - - V - - V],
-    %w[V - - - V - - - V],
-    %w[- - V - V - V - -]
+  # Winning positions
+  # WINNING_COMBINATIONS = [
+  #   %w[V V V - - - - - -],
+  #   %w[- - - V V V - - -],
+  #   %w[- - - - - - V V V],
+  #   %w[V - - V - - V - -],
+  #   %w[- V - - V - - V -],
+  #   %w[- - V - - V - - V],
+  #   %w[V - - - V - - - V],
+  #   %w[- - V - V - V - -]
+  # ].freeze
+
+  WINNING_INDEXES = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
   ].freeze
 
   attr_reader :board, :last_player
@@ -37,9 +49,9 @@ class TicTacToe
   end
 
   def winner?
-    return 'Player X wins' if WINNING_COMBINATIONS.include?(winning_array('X'))
-    return 'Player Y wins' if WINNING_COMBINATIONS.include?(winning_array('Y'))
-    
+    return 'Player X wins' if winning_position?(position_indexes('X'))
+    return 'Player Y wins' if winning_position?(position_indexes('Y'))
+
     'No winner yet'
   end
 
@@ -61,7 +73,11 @@ class TicTacToe
     @board[position - 1] = player
   end
 
-  def winning_array(player)
-    @board.map { |elem| elem == player ? 'V' : '-' }
+  def position_indexes(player)
+    @board.each_index.select { |i| board[i] == player }
+  end
+
+  def winning_position?(indexes_array)
+    WINNING_INDEXES.any? { |winning_indexes| (winning_indexes - indexes_array).empty? }
   end
 end

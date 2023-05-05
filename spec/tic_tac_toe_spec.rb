@@ -77,4 +77,15 @@ RSpec.describe TicTacToe do
     tic_tac_toe.play(6, "Y")
     expect(tic_tac_toe.winner?).to eq("No winner yet")
   end
+
+  it "detects winner with complex patern" do
+    tic_tac_toe.play(1, "Y")
+    tic_tac_toe.play(2, "X")
+    tic_tac_toe.play(4, "Y")
+    tic_tac_toe.play(3, "X")
+    tic_tac_toe.play(6, "Y")
+    tic_tac_toe.play(9, "X")
+    tic_tac_toe.play(7, "Y")
+    expect(tic_tac_toe.winner?).to eq("Player Y wins")
+  end
 end
