@@ -40,19 +40,18 @@ class TicTacToe
     @board
   end
 
+  def winner?
+    winner = winner_for_player('X')
+    winner ||= winner_for_player('Y')
+    winner ||= 'No winner yet'
+  end
+
   def player_turn?(player)
     @last_player != player
   end
 
   def player_turn
     @last_player == 'X' ? 'Y' : 'X' if @last_player
-  end
-
-  def winner?
-    return 'Player X wins' if winning_position?(position_indexes('X'))
-    return 'Player Y wins' if winning_position?(position_indexes('Y'))
-
-    'No winner yet'
   end
 
   private
@@ -79,5 +78,9 @@ class TicTacToe
 
   def winning_position?(indexes_array)
     WINNING_INDEXES.any? { |winning_indexes| (winning_indexes - indexes_array).empty? }
+  end
+
+  def winner_for_player(player)
+    winning_position?(position_indexes(player)) ? "Player #{player} wins" : nil
   end
 end

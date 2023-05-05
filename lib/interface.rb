@@ -17,14 +17,13 @@ class Interface
     puts ">"
     @game.play(position, "X")
     while @winner == "No winner yet"
-      display_board
       begin
         @game.play(position, @game.player_turn)
       rescue => e
         puts e.message
         next
       end
-      p @game.board
+      display_board
       puts @winner = @game.winner?
       exit if @winner != "No winner yet" || (@game.board.grep Integer).none?
     end
