@@ -25,8 +25,6 @@ class TicTacToe
   end
 
   def player_turn?(player)
-    return true if @last_player.nil?
-
     @last_player != player
   end
 
