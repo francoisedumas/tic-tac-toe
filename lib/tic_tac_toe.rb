@@ -1,27 +1,29 @@
 class TicTacToe
+  WINNING_COMBINATIONS = [
+    %w[V V V - - - - - -],
+    %w[- - - V V V - - -],
+    %w[- - - - - - V V V],
+    %w[V - - V - - V - -],
+    %w[- V - - V - - V -],
+    %w[- - V - - V - - V],
+    %w[V - - - V - - - V],
+    %w[- - V - V - V - -]
+  ].freeze
+
   attr_reader :board, :last_player
 
-  WINNING_COMBINATIONS = [
-    ["V", "V", "V", "-", "-", "-", "-", "-", "-"],
-    ["-", "-", "-", "V", "V", "V", "-", "-", "-"],
-    ["-", "-", "-", "-", "-", "-", "V", "V", "V"],
-    ["V", "-", "-", "V", "-", "-", "V", "-", "-"],
-    ["-", "V", "-", "-", "V", "-", "-", "V", "-"],
-    ["-", "-", "V", "-", "-", "V", "-", "-", "V"],
-    ["V", "-", "-", "-", "V", "-", "-", "-", "V"],
-    ["-", "-", "V", "-", "V", "-", "V", "-", "-"]
-  ]
-
   def initialize
-    @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @board = (1..9).to_a
     @last_player = nil
   end
 
   def play(position, player)
-    raise "Position not valid" if position > 9 || position < 1
-    raise "#{player} it's not your turn" unless player_turn?(player)
-    raise "Position not available" if @board[position - 1].is_a?(String)
-    @board[position - 1] = player
+    validate_position(position)
+    validate_player_turn(player)
+    validate_position_available(position)
+
+    update_board(position, player)
+
     @last_player = player
     @board
   end
@@ -31,16 +33,35 @@ class TicTacToe
   end
 
   def player_turn
-    return nil if @last_player.nil?
-
-    @last_player == "X" ? "Y" : "X"
+    @last_player == 'X' ? 'Y' : 'X' if @last_player
   end
 
   def winner?
-    challenger_array = @board.map { |elem| elem == "X" ? "V" : "-" }
-    return "Player X win" if WINNING_COMBINATIONS.include?(challenger_array)
-    challenger_array = @board.map { |elem| elem == "Y" ? "V" : "-" }
-    return "Player Y win" if WINNING_COMBINATIONS.include?(challenger_array)
-    "No winner yet"
+    return 'Player X wins' if WINNING_COMBINATIONS.include?(winning_array('X'))
+    return 'Player Y wins' if WINNING_COMBINATIONS.include?(winning_array('Y'))
+    
+    'No winner yet'
+  end
+
+  private
+
+  def validate_position(position)
+    raise 'Position not valid' unless position.between?(1, 9)
+  end
+
+  def validate_player_turn(player)
+    raise "#{player} it's not your turn" unless player_turn?(player)
+  end
+
+  def validate_position_available(position)
+    raise 'Position not available' if @board[position - 1].is_a?(String)
+  end
+
+  def update_board(position, player)
+    @board[position - 1] = player
+  end
+
+  def winning_array(player)
+    @board.map { |elem| elem == player ? 'V' : '-' }
   end
 end

@@ -24,6 +24,7 @@ class Interface
         puts e.message
         next
       end
+      p @game.board
       puts @winner = @game.winner?
       exit if @winner != "No winner yet" || (@game.board.grep Integer).none?
     end

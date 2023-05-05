@@ -57,7 +57,7 @@ RSpec.describe TicTacToe do
     tic_tac_toe.play(2, "X")
     tic_tac_toe.play(5, "Y")
     tic_tac_toe.play(3, "X")
-    expect(tic_tac_toe.winner?).to eq("Player X win")
+    expect(tic_tac_toe.winner?).to eq("Player X wins")
   end
 
   it "wins when a player has a column" do
@@ -66,7 +66,7 @@ RSpec.describe TicTacToe do
     tic_tac_toe.play(4, "Y")
     tic_tac_toe.play(3, "X")
     tic_tac_toe.play(7, "Y")
-    expect(tic_tac_toe.winner?).to eq("Player Y win")
+    expect(tic_tac_toe.winner?).to eq("Player Y wins")
   end
 
   it "returns no winner yet when no one has a row or a column" do
