@@ -6,9 +6,7 @@ class TicTacToe
   #   %w[- - - - - - V V V],
   #   %w[V - - V - - V - -],
   #   %w[- V - - V - - V -],
-  #   %w[- - V - - V - - V],
-  #   %w[V - - - V - - - V],
-  #   %w[- - V - V - V - -]
+  #   %w[- - V - - V - - V]
   # ].freeze
 
   WINNING_INDEXES = [
@@ -17,9 +15,7 @@ class TicTacToe
     [6, 7, 8],
     [0, 3, 6],
     [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
+    [2, 5, 8]
   ].freeze
 
   attr_reader :board, :last_player

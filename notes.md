@@ -74,3 +74,36 @@ COMPUTER has put a O in cell 4
               X | X  | O
 
 COMPUTER has won
+
+
+Diagonal should not be a winning pattern. If it is the player starting always win:
+
+                |    |
+            --------------
+                | O  | 
+            --------------
+                |    |
+
+                |    |
+            --------------
+                | O  | X
+            --------------
+                |    |
+
+                |    |
+            --------------
+                | O  | X
+            --------------
+                |    | O
+
+              X |    |
+            --------------
+                | O  | X
+            --------------
+                |    | O
+
+              X |    |
+            --------------
+                | O  | X
+            --------------
+                | O  | O
