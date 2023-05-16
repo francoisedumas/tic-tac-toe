@@ -22,6 +22,8 @@ class Bot
       easy(board)
     when "medium"
       medium(board)
+    else
+      easy(board)
     end
   end
 
