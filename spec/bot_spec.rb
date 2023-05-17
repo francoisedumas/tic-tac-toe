@@ -12,19 +12,14 @@ RSpec.describe Bot do
     context "when passed medium level" do
       subject(:bot) { described_class.new("medium") }
 
-      it "returns 2 ou 4" do
-        board = ["X", 2, 3, 4, 5, 6, 7, 8, 9]
-        expect([2, 4].include?(bot.computer_position(board))).to be(true)
-      end
-
-      it "returns 2 ou 4 ou 6 ou 8" do
-        board = [1, 2, 3, 4, "X", 6, 7, 8, 9]
-        expect([2, 4, 6, 8].include?(bot.computer_position(board))).to be(true)
-      end
-
-      it "returns 3" do
+      it "returns 3, to avoid losing" do
         board = ["X", "X", 3, "Y", 5, 6, 7, 8, 9]
         expect(bot.computer_position(board)).to eq(3)
+      end
+
+      it "returns 7, to avoid losing" do
+        board = ["X", "Y", 3, "X", "X", "Y", 7, 8, 9]
+        expect(bot.computer_position(board)).to eq(7)
       end
     end
   end
