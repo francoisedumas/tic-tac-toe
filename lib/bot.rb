@@ -45,7 +45,7 @@ class Bot
     # Check if challenger is about to win
     indexes_to_play = indexes_to_play(available_indexes, challenger_indexes)
     # if yes, take the position to avoid challenger to win
-    indexes_to_play.any? ? indexes_to_play.sample + 1 : easy(board)
+    indexes_to_play.any? ? indexes_to_play.sample + 1 : initializer(board)
   end
 
   def indexes_to_play(available_indexes, player_indexes)
@@ -57,5 +57,11 @@ class Bot
       indexes_to_play << remaining_indexes & available_indexes if (remaining_indexes & available_indexes).any?
     end
     indexes_to_play.flatten
+  end
+
+  def initializer(board)
+    # If bot is first to play, take the middle position
+    # See challenging pattern in the notes
+    board[4].is_a?(Integer) ? 5 : easy(board)
   end
 end
