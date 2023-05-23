@@ -38,16 +38,14 @@ class Bot
 
     # Check if bot can win
     winning_indexes = indexes_to_play(available_indexes, bot_indexes)
+
     # if yes, take the position to win
-    return winning_indexes.first + 1 if winning_indexes.one?
+    return winning_indexes.first + 1 if winning_indexes.any?
 
     # Check if challenger is about to win
     indexes_to_play = indexes_to_play(available_indexes, challenger_indexes)
     # if yes, take the position to avoid challenger to win
-    return indexes_to_play.first + 1 if indexes_to_play.one?
-
-    # else, play randomly
-    available_indexes.sample + 1
+    indexes_to_play.any? ? indexes_to_play.sample + 1 : easy(board)
   end
 
   def indexes_to_play(available_indexes, player_indexes)
@@ -56,9 +54,8 @@ class Bot
       remaining_indexes = winning_indexes - (winning_indexes & player_indexes)
       next if remaining_indexes.size != 1
 
-      indexes_to_play = remaining_indexes & available_indexes
-      break if indexes_to_play.one?
+      indexes_to_play << remaining_indexes & available_indexes if (remaining_indexes & available_indexes).any?
     end
-    indexes_to_play
+    indexes_to_play.flatten
   end
 end
