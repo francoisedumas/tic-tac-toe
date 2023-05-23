@@ -60,8 +60,9 @@ class Bot
   end
 
   def initializer(board)
-    # If bot is first to play, take the middle position
+    # First time to play for the bot take the middle position if available
+    # if not take a corner
     # See challenging pattern in the notes
-    board[4].is_a?(Integer) ? 5 : easy(board)
+    board[4].is_a?(Integer) ? 5 : [1, 3, 7, 9].sample
   end
 end
