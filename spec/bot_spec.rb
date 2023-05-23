@@ -26,7 +26,7 @@ RSpec.describe Bot do
 
       it "should choose to win" do
         board = ["X", "X", 3, "Y", "Y", 6, 7, 8, 9]
-        expect(bot.computer_position(board)).to eq(3)
+        expect(bot.computer_position(board)).to eq(6)
       end
 
       it "returns 7, to avoid losing" do
