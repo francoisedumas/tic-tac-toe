@@ -1,26 +1,7 @@
-class TicTacToe
-  # Winning positions
-  # WINNING_COMBINATIONS = [
-  #   %w[V V V - - - - - -],
-  #   %w[- - - V V V - - -],
-  #   %w[- - - - - - V V V],
-  #   %w[V - - V - - V - -],
-  #   %w[- V - - V - - V -],
-  #   %w[- - V - - V - - V],
-  #   %w[V - - - V - - - V],
-  #   %w[- - V - V - V - -]
-  # ].freeze
+require_relative 'constants'
 
-  WINNING_INDEXES = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ].freeze
+class TicTacToe
+  include GameConstants
 
   attr_reader :board, :last_player
 
