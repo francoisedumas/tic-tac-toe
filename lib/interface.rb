@@ -10,28 +10,33 @@ class Interface
   end
 
   def play
-    puts "Welcome to Tic Tac Toe"
-    puts "You are the player X"
-    display_board
-    puts "Player X, please choose a position"
-    @game.play(position, "X")
+    introduction
+    first_player = choose_player
+    first_position = position(first_player)
+    @game.play(first_position, first_player)
+
     while @winner == "No winner yet"
+      display_board
+      puts ""
+
       begin
         @game.play(position, @game.player_turn)
       rescue => e
         puts e.message
         next
       end
-      display_board
+
       puts @winner = @game.winner?
+      puts ""
+
       exit if @winner != "No winner yet" || (@game.board.grep Integer).none?
     end
   end
 
   private
 
-  def position
-    if @game.player_turn == "X" || @game.player_turn.nil?
+  def position(player = nil)
+    if @game.player_turn == "X" || player == "X"
       user_position
     else
       @bot.computer_position(@game.board)
@@ -39,6 +44,7 @@ class Interface
   end
 
   def user_position
+    puts "Choose a position to play"
     puts ">"
     begin
       input = gets.chomp
@@ -56,5 +62,30 @@ class Interface
     puts " #{board[3]} | #{board[4]} | #{board[5]} "
     puts "-----------"
     puts " #{board[6]} | #{board[7]} | #{board[8]} "
+  end
+
+  def introduction
+    puts "You are the player X"
+    puts "This is the board with the positions"
+    display_board
+    puts "During the game you will be asked to choose a position"
+    puts "----------------------"
+    puts ""
+  end
+
+  def choose_player
+    # A bit complex but usefull to have a UX where the user can choose without confusion
+    player = { 1 => "X", 2 => "Y"}
+
+    number = ""
+    until number == "1" || number == "2"
+      puts "Choose 1 to start or 2 to let the computer start"
+      number = gets.chomp
+    end
+
+    puts "----------------------"
+    puts ""
+
+    player[number.to_i]
   end
 end
