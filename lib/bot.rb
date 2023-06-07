@@ -45,10 +45,12 @@ class Bot
     # Check if challenger is about to win
     indexes_to_play = indexes_to_play(available_indexes, challenger_indexes)
     # if yes, take the position to avoid challenger to win
+
     indexes_to_play.any? ? indexes_to_play.sample + 1 : initializer(board)
   end
 
   def indexes_to_play(available_indexes, player_indexes)
+    return available_indexes if available_indexes.one?
     indexes_to_play = []
     WINNING_INDEXES.each do |winning_indexes|
       remaining_indexes = winning_indexes - (winning_indexes & player_indexes)
